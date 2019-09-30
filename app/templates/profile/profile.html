@@ -40,20 +40,18 @@
 
 </div>
 <div class="row">
-{% for pitch in pitches_content %}
+{% for blog in blogs_content %}
 <div class="col-md-6">
   <div class="thumbnail text-center">
-  <h5 class="card-header">{{pitch.title}}</h5>
-  <h5 class="card-header">{{pitch.category}}</h5>
+  <h5 class="card-header">{{blog.title}}</h5>
+  <h5 class="card-header">{{blog.category}}</h5>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <h2>{{pitch.description}}</h2>
-      <footer class="blockquote-footer"> Posted by {{pitch.user.username}}</footer>
+      <h2>{{blog.description}}</h2>
+      <footer class="blockquote-footer"> Posted by {{blog.user.username}}</footer>
     </blockquote>
     
-    <a href="{{url_for('main.new_comment',pitch_id = pitch.id)}}" class="btn btn-info"> Add a comment</a>
-    <a href="{{url_for('main.upvote',pitch_id = pitch.id)}}" class= "btn btn-info"><i></i>Upvote <span>{{pitch.upvotes.count()}}</span></a>
-    <a href="{{url_for('main.downvote',pitch_id = pitch.id)}}" class= "btn btn-info"><i class="far fa-thumbs-up"></i>Downvote <span>{{pitch.downvotes.count()}}</span></a>
+    <a href="{{url_for('main.new_comment',blog_id = blog.id)}}" class="btn btn-info"> Add a comment</a>
     
   </div>
 </div>

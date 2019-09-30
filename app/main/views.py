@@ -19,15 +19,15 @@ def index():
    
     blog = Blog.query.filter_by().first()
     title = 'HomePage'
-    Music = Blog.query.filter_by(category="music")
-    Lifestyle = Blog.query.filter_by(category = "lifestyle")
-    Sports= Blog.query.filter_by(category = "sports")
-    Fashion = Blog.query.filter_by(category = "fashion")
+    music = Blog.query.filter_by(category="music")
+    lifestyle = Blog.query.filter_by(category = "lifestyle")
+    sports= Blog.query.filter_by(category = "sports")
+    fashion = Blog.query.filter_by(category = "fashion")
 
     return render_template('index.html', title = title, blog = blog, music=music, lifestyle= lifestyle, sports = sports, fashion = fashion)
     
 
-@main.route('/pitches/new/', methods = ['GET','POST'])
+@main.route('/blogs/new/', methods = ['GET','POST'])
 @login_required
 def new_blog():
     form = BlogForm()
@@ -46,23 +46,23 @@ def new_blog():
 
 
 
-@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
 @login_required
-def new_comment(pitch_id):
+def new_comment(blog_id):
     form = CommentForm()
-    pitch=Pitch.query.get(pitch_id)
+    blog=Blog.query.get(blog_id)
     if form.validate_on_submit():
         description = form.description.data
 
-        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, blog_id = blog_id)
         db.session.add(new_comment)
         db.session.commit()
 
 
-        return redirect(url_for('.new_comment', pitch_id= pitch_id))
+        return redirect(url_for('.new_comment', blog_id= blog_id))
 
-    all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
-    return render_template('comment.html', form = form, comment = all_comments, pitch = pitch )
+    all_comments = Comment.query.filter_by(blog_id = blog_id).all()
+    return render_template('comment.html', form = form, comment = all_comments, blog = blog )
 
 
 
@@ -70,10 +70,10 @@ def new_comment(pitch_id):
 @login_required
 def profile(uname):
  user = User.query.filter_by(username = uname).first()
- get_pitches = Pitch.query.filter_by(user_id = current_user.id).all()
+ get_blogs = Blog.query.filter_by(user_id = current_user.id).all()
  if user is None:
      abort(404)
- return render_template("profile/profile.html", user = user, pitches_content = get_pitches)
+ return render_template("profile/profile.html", user = user, blogs_content = get_blogs)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required

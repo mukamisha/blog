@@ -12,7 +12,7 @@
 					<footer class="blockquote-footer"> Posted by {{category.user.username}}</footer>
 				</blockquote>
 				
-				<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-info"> Add a comment</a>
+				<a href="{{url_for('main.new_comment',blog_id = category.id)}}" class="btn btn-info"> Add a comment</a>
 				
 				
 			</div>
@@ -33,7 +33,7 @@
 			{% if comments %}
 			{% for comment in comments %}
 				<div class="row text-center">
-						<a><p style="color: brown">{{ comment.description }}</p></a>
+						<a><p style="color: black">{{ comment.description }}</p></a>
 						<small> posted by {{comment.user.username}}</small>
 				</div>
 			{% endfor %}

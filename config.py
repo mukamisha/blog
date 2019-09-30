@@ -8,7 +8,7 @@ class Config:
     # MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
     # MOVIE_API_KEY = '2197098f34dd6b61e8919f32ae43e37d'
     SECRET_KEY = 'jacky2'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/blogs'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -27,7 +27,7 @@ class ProdConfig(Config):
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/pitch_test'
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/blogs'
     DEBUG = True
 
 config_options = {

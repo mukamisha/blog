@@ -9,7 +9,7 @@ class UpdateProfile(FlaskForm):
 class BlogForm(FlaskForm):
 	title = StringField('Title', validators=[Required()])
 	description = TextAreaField("What would you like to post ?",validators=[Required()])
-	category = RadioField('Label', choices=[ ('promotionpitch','promotionpitch'), ('interviewpitch','interviewpitch'),('pickuplines','pickuplines'),('productpitch','productpitch')],validators=[Required()])
+	category = RadioField('Label', choices=[ ('music','music'), ('lifestyle','lifestyle'),('sports','sports'),('fashion','fashion')],validators=[Required()])
 	submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
