@@ -45,6 +45,14 @@ def new_blog():
     return render_template('blog.html',form=form)
 
 
+@main.route('/delete_blog/<int:blog_id>',methods= ['POST','GET'])
+@login_required
+def delete_blog(post_id):
+   blog= Blog.query.filter_by(id = blog_id).first()
+   blog.delete_blog()
+   return redirect(url_for('main.index'))
+
+
 
 @main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
 @login_required

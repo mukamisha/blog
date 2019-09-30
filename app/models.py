@@ -57,6 +57,10 @@ class Blog(db.Model):
         blogs = Blog.query.order_by(blog_id=id).desc().all()
         return blogs
 
+    def delete_blog(self):
+       db.session.delete(self)
+       db.session.commit()
+
     def __repr__(self):
         return f'Blog {self.description}'
 
