@@ -2,12 +2,11 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 # from ..request import get_movies,get_movie,search_movie
-from .forms import BlogForm,CommentForm,UpdateProfile
+from .forms import BlogForm,CommentForm,UpdateProfile,UpdateForm
 from .. import db,photos
 from ..models import User,Blog,Comment
 from flask_login import login_required,current_user
 import markdown2
- 
 
 
 
@@ -48,9 +47,18 @@ def new_blog():
 @main.route('/delete_blog/<int:blog_id>',methods= ['POST','GET'])
 @login_required
 def delete_blog(blog_id):
-   blog= Blog.query.filter_by(id = blog_id).first()
-   blog.delete_blog()
-   return redirect(url_for('main.index'))
+    blog= Blog.query.filter_by(id = blog_id).first()
+    comments=blog.comments
+    if blog.comments:
+      for comment in comments:
+          db.session.delete(comment)
+          db.session.commit()
+          user = current_user
+          db.session.delete(blog)
+          db.session.commit()
+      return redirect(url_for('.profile', uname=user.username))
+    return render_template('profile/profile.html', user=user)
+
 
 
 
@@ -100,6 +108,10 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+
+
+
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required

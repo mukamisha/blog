@@ -16,3 +16,9 @@ class CommentForm(FlaskForm):
 	description = TextAreaField('Add comment',validators=[Required()])
 	submit = SubmitField()
 
+class UpdateForm(FlaskForm):
+	title = StringField('Title', validators=[Required()])
+	description = TextAreaField("What would you like to post ?",validators=[Required()])
+	category = RadioField('Label', choices=[ ('music','music'), ('lifestyle','lifestyle'),('sports','sports'),('fashion','fashion')],validators=[Required()])
+	submit = SubmitField('Submit')
+
