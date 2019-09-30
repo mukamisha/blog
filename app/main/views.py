@@ -110,7 +110,22 @@ def update_profile(uname):
     return render_template('profile/update.html',form =form)
 
 
-
+@main.route('/profile/update/<int:blog_id>',methods = ['GET','POST'])
+@login_required
+def update_blog(blog_id):
+   users = Blog.query.filter_by(id=blog_id).first()
+   if users is None:
+       abort(404)
+   user = current_user
+   form = UpdateForm()
+   if form.validate_on_submit():
+       users.title = form.title.data
+       users.description = form.description.data
+       users.category = form.category.data
+       db.session.add(users)
+       db.session.commit()
+       return redirect(url_for('.profile',uname=user.username))
+   return render_template('profile/update.html',form =form, user = user)
 
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
