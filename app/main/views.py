@@ -3,10 +3,14 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 # from ..request import get_movies,get_movie,search_movie
 from .forms import BlogForm,CommentForm,UpdateProfile,UpdateForm
+from ..request import getQuotes
 from .. import db,photos
-from ..models import User,Blog,Comment
+from ..models import User,Blog,Comment,Subscription
 from flask_login import login_required,current_user
+import requests
 import markdown2
+from ..email import mail_message
+
 
 
 
@@ -15,7 +19,7 @@ import markdown2
 @main.route('/', methods = ['GET','POST'])
 def index():
 
-   
+    quotes = getQuotes()
     blog = Blog.query.filter_by().first()
     title = 'HomePage'
     music = Blog.query.filter_by(category="music")
@@ -23,7 +27,7 @@ def index():
     sports= Blog.query.filter_by(category = "sports")
     fashion = Blog.query.filter_by(category = "fashion")
 
-    return render_template('index.html', title = title, blog = blog, music=music, lifestyle= lifestyle, sports = sports, fashion = fashion)
+    return render_template('index.html', title = title, blog = blog, music=music, lifestyle= lifestyle, sports = sports, fashion = fashion,quotes=quotes)
     
 
 @main.route('/blogs/new/', methods = ['GET','POST'])
@@ -40,6 +44,9 @@ def new_blog():
         new_blog = Blog(user_id =current_user._get_current_object().id, title = title,description=description,category=category)
         db.session.add(new_blog)
         db.session.commit()
+        for email in subscribe:
+           mail_message("New Blog Alert!!!!",
+                        "email/blog_alert", email.email, subscribe=subscribe)
         return redirect(url_for('main.index'))
     return render_template('blog.html',form=form)
 
@@ -138,5 +145,7 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
 
 

@@ -43,3 +43,17 @@ def register():
         return redirect(url_for('auth.login'))
         title = "New Account"
     return render_template('auth/register.html',registration_form = form)
+
+
+@auth.route('/subscription', methods=["GET", "POST"])
+def subscription():
+   subform = SubscriptionForm()
+   if subform.validate_on_submit():
+       subscribers = Subscription(name=subform.name.data, email=subform.user_email.data)
+       db.session.add(subscribers)
+       db.session.commit()
+       mail_message("Welcome to Express Yourself Blog...",
+                    "email/welcome_user", subscribers.email, subscribers=subscribers)
+       return redirect(url_for('main.index'))
+       title = "New Subscription"
+   return render_template('auth/subscribe.html', subscription_form=subform)

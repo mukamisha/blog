@@ -5,8 +5,7 @@ class Config:
     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
-    # MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
-    # MOVIE_API_KEY = '2197098f34dd6b61e8919f32ae43e37d'
+    QUOTES_API = 'http://quotes.stormconsultancy.co.uk/random.json'
     SECRET_KEY = 'jacky2'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mukamisha:mukamisha@97@localhost/blogs'
     UPLOADED_PHOTOS_DEST ='app/static/photos'

@@ -78,6 +78,27 @@ class Comment(db.Model):
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
 
+class Random_Quotes:
+  '''
+  a class to define quote objects
+  '''
+  def __init__(self,id,author,quote,permalink):
+      self.id =id
+      self.author = author
+      self.quote = quote
+      self.permalink = "http://quotes.stormconsultancy.co.uk/quotes/31"
+
+
+class Subscription(db.Model):
+   __tablename__ = 'subscribers'
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(100))
+   email = db.Column(db.String(100), unique=True)
+   def __repr__(self):
+       return f'User {self.name}'
+
+
+
 
 
 
