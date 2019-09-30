@@ -47,7 +47,7 @@ def new_blog():
 
 @main.route('/delete_blog/<int:blog_id>',methods= ['POST','GET'])
 @login_required
-def delete_blog(post_id):
+def delete_blog(blog_id):
    blog= Blog.query.filter_by(id = blog_id).first()
    blog.delete_blog()
    return redirect(url_for('main.index'))
