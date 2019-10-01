@@ -23,3 +23,5 @@ this is a web application that helps you to post all your blogs that can inspire
 
 ## SUPPORT AND CONTACT 
 email:mukamishajacky97@gmail.com.
+## LISENCE
+lisenced by copyright@2019..
