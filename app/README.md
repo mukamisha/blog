@@ -9,3 +9,6 @@ this is a web application that helps you to post all your blogs that can inspire
 	*VISIO STUDIO CODE.	
     *GOOGLE CHROME
 
+## TECHNOLOGY USED:
+    * PYTHON.
+    
