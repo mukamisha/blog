@@ -7,4 +7,5 @@ this is a web application that helps you to post all your blogs that can inspire
 
 	*UBUNTU.
 	*VISIO STUDIO CODE.	
-  
+    *GOOGLE CHROME
+
