@@ -12,4 +12,6 @@ this is a web application that helps you to post all your blogs that can inspire
 ## TECHNOLOGY USED:
     * PYTHON.
     *FLASK
-    
+    *HTML
+    *CSS
+   
