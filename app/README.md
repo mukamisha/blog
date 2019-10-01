@@ -21,3 +21,5 @@ this is a web application that helps you to post all your blogs that can inspire
     * you can leave a comment if you want, you comments are very valuable to us.
 ## This is my project link
 
+## SUPPORT AND CONTACT 
+email:mukamishajacky97@gmail.com.
