@@ -5,3 +5,5 @@ this is a web application that helps you to post all your blogs that can inspire
 
 ## SETUP INSTALLATION REQUIRED:
 
+	*UBUNTU.
+
