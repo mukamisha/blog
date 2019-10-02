@@ -1,10 +1,10 @@
 
 from flask import render_template,request,redirect,url_for,abort
-
+from . import main
 from .forms import BlogForm,CommentForm,UpdateProfile,UpdateForm
 from ..request import getQuotes
 from .. import db,photos
-from ..models import User,Blog,Comment,Subscription
+from ..models import User,Blog,Comment
 from flask_login import login_required,current_user
 import requests
 import markdown2
@@ -43,9 +43,6 @@ def new_blog():
         new_blog = Blog(user_id =current_user._get_current_object().id, title = title,description=description,category=category)
         db.session.add(new_blog)
         db.session.commit()
-        for email in subscribe:
-           mail_message("New Blog Alert!!!!",
-                        "email/blog_alert", email.email, subscribe=subscribe)
         return redirect(url_for('main.index'))
     return render_template('blog.html',form=form)
 
@@ -55,14 +52,15 @@ def new_blog():
 def delete_blog(blog_id):
     blog= Blog.query.filter_by(id = blog_id).first()
     comments=blog.comments
+    
     if blog.comments:
       for comment in comments:
           db.session.delete(comment)
           db.session.commit()
-          user = current_user
-          db.session.delete(blog)
-          db.session.commit()
-      return redirect(url_for('.profile', uname=user.username))
+    user = current_user
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect(url_for('.profile', uname=user.username))
     return render_template('profile/profile.html', user=user)
 
 
